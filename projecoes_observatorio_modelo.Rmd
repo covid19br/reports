@@ -1,5 +1,5 @@
 ---
-title: "`r paste('Casos de COVID-19 - ', nome_unid)`"
+title: "`r paste('Casos de COVID-19 - Estado de ', nome_unid)`"
 subtile: "Avaliação preliminar de projeção de casos a curto prazo"
 author: "Observatório COVID-19 BR"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
@@ -11,6 +11,11 @@ header-includes:
 ---
 
 # Sumário executivo
+
+* 
+* Projeção para dia `r data.final` : 
+entre `r round(exp.5d[5,2])` e `r round(exp.5d[5,3])` casos notificados.
+* Projeção dia a dia na tabela a seguir
 
 ## Projeções de número de casos que serão notificados
 

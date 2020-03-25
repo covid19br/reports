@@ -106,6 +106,7 @@ if(unid == "p"){
     exp.5d <- forecast.exponential(nconf.zoo,
                                    start = length(time(nconf.zoo))-4,
                                    days.forecast = 5)
+    data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
     dados.filter <- dados.full[dados.full$state == nome_unid,]
     dados.clean <- as.data.frame(aggregate(dados.filter$total.confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
@@ -118,6 +119,7 @@ if(unid == "p"){
     exp.5d <- forecast.exponential(nconf.zoo,
                                    start = length(time(nconf.zoo))-4,
                                    days.forecast = 5)
+    data.final <- format(time(exp.5d)[5], format="%d de %B")
 }
 
 render(input = "./projecoes_observatorio_modelo.Rmd",
