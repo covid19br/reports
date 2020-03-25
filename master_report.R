@@ -2,7 +2,7 @@
 # Written by:
 # Gustavo Burin <gustavoburin@usp.br>
 # In colaboration with:
-# XXXXXXXXXX
+# Equipe Observatório COVID-19 BR
 
 
 #####################################
@@ -92,6 +92,13 @@ if(opt$options$u != "p" & opt$options$n == "Brasil"){
 #set.seed(2)
 unid <- opt$options$u
 nome_unid <- opt$options$n
+if(unid=="e")
+    nome_titulos  <-  paste("Estado de/da",nome_unid)
+if(unid=="m")
+    nome_titulos  <-  paste("Município de",nome_unid)
+if(unid=="p")
+        nome_titulos  <-  "Brasil"
+    
 
 if(length(opt$args) == 0){
     dados.full <- read.csv("./dados/states2.csv", as.is = TRUE)
@@ -110,6 +117,7 @@ if(unid == "p"){
     exp.5d <- forecast.exponential(nconf.zoo,
                                    start = length(time(nconf.zoo))-4,
                                    days.forecast = 5)
+    data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
     dados.filter <- dados.full[dados.full$state == nome_unid,]
     dados.clean <- as.data.frame(aggregate(dados.filter$total.confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
@@ -122,6 +130,7 @@ if(unid == "p"){
     exp.5d <- forecast.exponential(nconf.zoo,
                                    start = length(time(nconf.zoo))-4,
                                    days.forecast = 5)
+    data.final <- format(time(exp.5d)[5], format="%d de %B")
 }
 
 render(input = "./projecoes_observatorio_modelo.Rmd",
