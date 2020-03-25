@@ -1,5 +1,5 @@
 ---
-title: "`r paste('Casos de COVID-19 - Estado de ', nome_unid)`"
+title: "`r paste('Casos de COVID-19 para o', nome_titulos)`"
 subtile: "Avaliação preliminar de projeção de casos a curto prazo"
 author: "Observatório COVID-19 BR"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
@@ -15,7 +15,7 @@ header-includes:
 
 # Sumário executivo
 
-* 
+* No dia de hoje temos `r nconf$total.confirmed.cases[nrow(nconf)]` casos notificados.
 * Projeção para dia `r data.final` : 
 entre `r round(exp.5d[5,2])` e `r round(exp.5d[5,3])` casos notificados.
 * Projeção dia a dia na tabela a seguir
@@ -29,7 +29,7 @@ kable(data.frame(exp.5d),
       align = "c",
       digits = 0,
       col.names = c("Previsto", "Limite Inferior", "Limite Superior"),
-      caption = "Projeção empírica do número de casos notificados para os próximos 5 dias.",
+      caption = paste(nome_titulos, "- Projeção empírica do número de casos notificados para os próximos 5 dias."),
       escape = FALSE
       )
 
@@ -37,11 +37,11 @@ kable(data.frame(exp.5d),
 
 ## Gráfico das projeções
 
-* Pontos pretos : número de casos confirmados no Estado a cada dia.
+* Pontos pretos : número de casos confirmados a cada dia.
 * Pontos laranjas: a previsão para os próximos 5 dias
 * Cinza : intervalo de confiança dessa previsão. 
 
-```{r estimativa_crescimento_exponencial, fig.width = 7,  fig.height = 5, fig.cap = paste("Estimativas de crescimento exponencial para os próximos 5 dias para ", nome_unid)}
+```{r estimativa_crescimento_exponencial, fig.width = 7,  fig.height = 5, fig.cap = paste("Estimativas de crescimento exponencial para os próximos 5 dias para  o", nome_titulos)}
 ################################################################################
 ## Parametros de formatacao comum aos plots
 ################################################################################
@@ -68,7 +68,7 @@ ggplot(data = ncasos.completa, aes(x = Index, y = casos, ymin = ic.low, ymax = i
                size=2, col="#e66101") +
     scale_x_date(date_labels = "%d/%b", name="") +
     scale_y_log10() +
-    labs(y = "Número de casos", x = "Data", title = paste("Número de casos notificados em escala logarítimica - ", nome_unid)) +
+    labs(y = "Número de casos", x = "Data", title = paste("Número de casos notificados em escala logarítimica - ", nome_titulos)) +
     plot.formatos
 
 ```
@@ -78,10 +78,11 @@ ggplot(data = ncasos.completa, aes(x = Index, y = casos, ymin = ic.low, ymax = i
 
 Na atual fase da epidemia o número diário de casos confirmados tem
 mostrado uma relação linear com o número de dias transcorridos, em
-escala logarítimica. Usamos essa relação observada empiricamente para
-ajustar uma regressão linear para contagens (glm Poisson) aos 5
-últimos pontos da séries. Com este modelo de regressão projetamos os
-valores para os próximos 5 dias, e um intervalo de confiança.
+escala logarítimica e para pequenos intervalos de tempo.  Usamos essa
+relação observada empiricamente para ajustar uma regressão linear para
+contagens (glm Poisson) aos 5 últimos pontos da série temporal de
+casos notificados.  Com este modelo de regressão projetamos os valores
+para os próximos 5 dias, e um intervalo de confiança da previsão.
 
 ## Limitações
 
@@ -89,7 +90,7 @@ valores para os próximos 5 dias, e um intervalo de confiança.
 confirmados for a mesma dos últimos 5 dias**
 
 Este documento extrapola dados de número de casos notificados no
-estado de São Paulo até o dia de hoje. O número de casos notificados
+estado até o dia de hoje. O número de casos notificados
 está atrasado com relação ao número real de casos, por conta dos
 tempos até surgimento de sintoma e realização do teste, e refletem
 provavelmente uma fração do total de casos, pois muitos casos leves

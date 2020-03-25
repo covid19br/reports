@@ -2,7 +2,7 @@
 # Written by:
 # Gustavo Burin <gustavoburin@usp.br>
 # In colaboration with:
-# XXXXXXXXXX
+# Equipe Observatório COVID-19 BR
 
 
 #####################################
@@ -92,6 +92,13 @@ if(opt$options$u != "p" & opt$options$n == "Brasil"){
 #set.seed(2)
 unid <- opt$options$u
 nome_unid <- opt$options$n
+if(unid=="e")
+    nome_titulos  <-  paste("Estado de/da",nome_unid)
+if(unid=="m")
+    nome_titulos  <-  paste("Município de",nome_unid)
+if(unid=="p")
+        nome_titulos  <-  "Brasil"
+    
 
 if(length(opt$args) == 0){
     dados.full <- read.csv("./dados/dados_por_estado.csv", as.is = TRUE)
