@@ -94,7 +94,7 @@ unid <- opt$options$u
 nome_unid <- opt$options$n
 
 if(length(opt$args) == 0){
-    dados.full <- read.csv("./dados/dados_por_estado.csv", as.is = TRUE)
+    dados.full <- read.csv("./dados/states2.csv", as.is = TRUE)
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
     }
