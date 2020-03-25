@@ -73,9 +73,9 @@ option_list <- list(
 
     )
 
-parser_object <- OptionParser(usage = "Rscript %prog [UNID] [NOME]\n", 
+parser_object <- OptionParser(usage = "Rscript %prog [Opções] [ARQUIVO]\n", 
                               option_list = option_list, 
-                              description = "Script para compilar reports personalizados. Caso deseje gerar um relatório para o país, usar opção --u 'p'; caso queira algum estado em particular, usar opções --u 'e' --n '[NOME_ESTADO]'.")
+                              description = "Script para compilar reports personalizados. Caso deseje gerar um relatório para o país, usar opção --u 'p'; caso queira algum estado em particular, usar opções --u 'e' --n '[NOME_ESTADO]'. Caso deseje usar uma tabela externa, indicar o caminho para o arquivo .csv após as opções. A tabela deverá conter obrigatoriamente ao menos duas colunas: 'day' e 'total.confirmed.cases'")
 opt <- parse_args(parser_object, args = commandArgs(trailingOnly = TRUE), positional_arguments=TRUE)
 
 #####################################
@@ -93,7 +93,11 @@ if(opt$options$u != "p" & opt$options$n == "Brasil"){
 unid <- opt$options$u
 nome_unid <- opt$options$n
 
-dados.full <- read.csv("./dados/dados_por_estado.csv", as.is = TRUE)
+if(length(opt$args) == 0){
+    dados.full <- read.csv("./dados/dados_por_estado.csv", as.is = TRUE)
+} else {
+    dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
+    }
 
 if(unid == "p"){
     dados.clean <- as.data.frame(aggregate(dados.full$total.confirmed.cases, by = list(dados.full$day), FUN = sum, na.rm = TRUE))
