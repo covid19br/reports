@@ -3,7 +3,10 @@ title: "`r paste('Casos de COVID-19 - ', nome_unid)`"
 subtile: "Avaliação preliminar de projeção de casos a curto prazo"
 author: "Observatório COVID-19 BR"
 date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
-output: pdf_document
+output: 
+  pdf_document:
+    latex_engine: xelatex
+keep_tex: true
 header-includes:
   - \usepackage{float}
   - \floatplacement{table}{H}
@@ -21,7 +24,8 @@ kable(data.frame(exp.5d),
       align = "c",
       digits = 0,
       col.names = c("Previsto", "Limite Inferior", "Limite Superior"),
-      caption = "Projeção empírica do número de casos notificados para os próximos 5 dias."
+      caption = "Projeção empírica do número de casos notificados para os próximos 5 dias.",
+      escape = FALSE
       )
 
 ```
