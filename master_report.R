@@ -107,8 +107,8 @@ if(length(opt$args) == 0){
     }
 
 if(unid == "p"){
-    dados.clean <- as.data.frame(aggregate(dados.full$total.confirmed.cases, by = list(dados.full$day), FUN = sum, na.rm = TRUE))
-    names(dados.clean) <- c("day", "total.confirmed.cases")
+    dados.clean <- as.data.frame(aggregate(dados.full$confirmed.cases, by = list(dados.full$day), FUN = sum, na.rm = TRUE))
+    names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]
     nconf.zoo <- zoo(nconf[,-1], as.Date(nconf$day)) %>%
@@ -120,8 +120,8 @@ if(unid == "p"){
     data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
     dados.filter <- dados.full[dados.full$state == nome_unid,]
-    dados.clean <- as.data.frame(aggregate(dados.filter$total.confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
-    names(dados.clean) <- c("day", "total.confirmed.cases")
+    dados.clean <- as.data.frame(aggregate(dados.filter$confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
+    names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]
     nconf.zoo <- zoo(nconf[,-1], as.Date(nconf$day)) %>%
