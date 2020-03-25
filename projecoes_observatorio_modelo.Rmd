@@ -1,0 +1,107 @@
+---
+title: "`r paste('Casos de COVID-19 - ', nome_unid)`"
+subtile: "Avaliação preliminar de projeção de casos a curto prazo"
+author: "Observatório COVID-19 BR"
+date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
+output: pdf_document
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{table}{H}
+  - \floatplacement{figure}{H}
+---
+
+# Sumário executivo
+
+## Projeções de número de casos que serão notificados
+
+```{r projecoes_Poisson}
+
+kable(data.frame(exp.5d),
+      format = "latex",
+      align = "c",
+      digits = 0,
+      col.names = c("Previsto", "Limite Inferior", "Limite Superior"),
+      caption = "Projeção empírica do número de casos notificados para os próximos 5 dias."
+      )
+
+```
+
+## Gráfico das projeções
+
+* Pontos pretos : número de casos confirmados no Estado a cada dia.
+* Pontos laranjas: a previsão para os próximos 5 dias
+* Cinza : intervalo de confiança dessa previsão. 
+
+```{r estimativa_crescimento_exponencial, fig.width = 7,  fig.height = 5, fig.cap = paste("Estimativas de crescimento exponencial para os próximos 5 dias para ", nome_unid)}
+################################################################################
+## Parametros de formatacao comum aos plots
+################################################################################
+plot.formatos <- theme_bw()+
+    theme(axis.text= element_text(size=12, face="bold"),
+          axis.title.y = element_text(size=14, face="bold"))
+
+################################################################################
+## Grafico da serie observada e do previsto pelo modelo exponencial
+## para os proximos 5 dias (com intervalo de confiança)
+################################################################################
+## Serie com observados e previstos
+## (gambiarra para ter linha contínua no grafico, verificar help de ggplot.zoo)
+
+ncasos.completa <- merge(casos = nconf.zoo, exp.5d[, c("predito","ic.low","ic.upp")])
+ncasos.completa$casos[time(ncasos.completa) >= min(time(exp.5d))] <- exp.5d$predito[time(exp.5d) >= min(time(exp.5d))]
+## O plot
+
+ggplot(data = ncasos.completa, aes(x = Index, y = casos, ymin = ic.low, ymax = ic.upp)) +
+    geom_ribbon(fill = "lightgrey") +
+    geom_line() +
+    geom_point(data = ncasos.completa[time(ncasos.completa) <= min(time(exp.5d))], size = 2) +
+    geom_point(data = ncasos.completa[time(ncasos.completa) >= min(time(exp.5d))],
+               size=2, col="#e66101") +
+    scale_x_date(date_labels = "%d/%b", name="") +
+    scale_y_log10() +
+    labs(y = "Número de casos", x = "Data", title = paste("Número de casos notificados em escala logarítimica - ", nome_unid)) +
+    plot.formatos
+
+```
+
+
+# Detalhes técnicos
+
+Na atual fase da epidemia o número diário de casos confirmados tem
+mostrado uma relação linear com o número de dias transcorridos, em
+escala logarítimica. Usamos essa relação observada empiricamente para
+ajustar uma regressão linear para contagens (glm Poisson) aos 5
+últimos pontos da séries. Com este modelo de regressão projetamos os
+valores para os próximos 5 dias, e um intervalo de confiança.
+
+## Limitações
+
+**Os valores projetados serão válidos se a taxa de crescimento de casos
+confirmados for a mesma dos últimos 5 dias**
+
+Este documento extrapola dados de número de casos notificados no
+estado de São Paulo até o dia de hoje. O número de casos notificados
+está atrasado com relação ao número real de casos, por conta dos
+tempos até surgimento de sintoma e realização do teste, e refletem
+provavelmente uma fração do total de casos, pois muitos casos leves
+provavelmente não são notificados. A propriedade das estimativas está
+para ser avaliada pelo grupo e métodos.
+
+
+## Observatório COVID-19 BR
+
+O Observatório Covid-19 BR é uma iniciativa independente, fruto da
+colaboração entre pesquisadores com o desejo de contribuir para a
+disseminação de informação de qualidade baseada em dados atualizados e
+análises cientificamente embasadas. 
+
+Criamos um sítio com códigos de fonte aberta que nos permite
+acompanhar o estado atual da epidemia de Covid-19 no Brasil, incluindo
+análises estatísticas e previsões. Modelos estatísticos e matemáticos
+para previsões da epidemia estão em preparação
+
+**Site:** https://covid19br.github.io/index.html
+
+**Contato:** obscovid19br@gmail.com
+
+
