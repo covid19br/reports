@@ -15,7 +15,7 @@ header-includes:
 
 # Sumário executivo
 
-* No dia de hoje temos `r nconf$total.confirmed.cases[nrow(nconf)]` casos notificados.
+* No dia de hoje temos `r nconf$confirmed.cases[nrow(nconf)]` casos notificados.
 * Projeção para dia `r data.final` : 
 entre `r round(exp.5d[5,2])` e `r round(exp.5d[5,3])` casos notificados.
 * Projeção dia a dia na tabela a seguir
