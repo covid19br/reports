@@ -14,6 +14,10 @@
 ###
 #####################################
 #####################################
+
+# Setting locale to Brasil
+Sys.setlocale(category = "LC_TIME", locale = "pt_BR.UTF-8")
+
 # Loading Libraries Required
 options(warn=1)
 suppressPackageStartupMessages(library("optparse"))
