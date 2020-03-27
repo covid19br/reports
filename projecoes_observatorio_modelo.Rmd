@@ -6,16 +6,14 @@ date: "`r format(Sys.time(), '%d/%m/%Y %H:%M:%S')`"
 output: 
   pdf_document:
     latex_engine: xelatex
+    includes:
+     in_header: header.tex
 keep_tex: true
-header-includes:
-  - \usepackage{float}
-  - \floatplacement{table}{H}
-  - \floatplacement{figure}{H}
 ---
 
 # Sumário executivo
 
-* No dia de hoje temos `r nconf$confirmed.cases[nrow(nconf)]` casos notificados.
+* No dia de hoje acumulamos `r nconf$confirmed.cases[nrow(nconf)]` casos notificados.
 * Projeção para dia `r data.final` : 
 entre `r round(exp.5d[5,2])` e `r round(exp.5d[5,3])` casos notificados.
 * Projeção dia a dia na tabela a seguir
@@ -41,7 +39,7 @@ kable(data.frame(exp.5d),
 * Pontos laranjas: a previsão para os próximos 5 dias
 * Cinza : intervalo de confiança dessa previsão. 
 
-```{r estimativa_crescimento_exponencial, fig.width = 7,  fig.height = 5, fig.cap = paste("Estimativas de crescimento exponencial para os próximos 5 dias para  o", nome_titulos)}
+```{r estimativa_crescimento_exponencial, fig.width =4.5,  fig.height = 3, fig.cap = paste("Estimativas de crescimento exponencial para os próximos 5 dias para  o", nome_titulos)}
 ################################################################################
 ## Parametros de formatacao comum aos plots
 ################################################################################
@@ -68,11 +66,10 @@ ggplot(data = ncasos.completa, aes(x = Index, y = casos, ymin = ic.low, ymax = i
                size=2, col="#e66101") +
     scale_x_date(date_labels = "%d/%b", name="") +
     scale_y_log10() +
-    labs(y = "Número de casos", x = "Data", title = paste("Número de casos notificados em escala logarítimica - ", nome_titulos)) +
+    labs(y = "Número de casos", x = "Data", title = paste(nome_titulos, "(Escala logarítimica)")) +
     plot.formatos
-
 ```
-
+\FloatBarrier
 
 # Detalhes técnicos
 
