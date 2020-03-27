@@ -91,6 +91,11 @@ if(opt$options$u != "p" & opt$options$n == "Brasil"){
 
 
 #####################################
+# Atualizando tabela do ministério da saúde
+
+#system("curl -s 'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMapa' -H 'X-Parse-Application-Id: unAFkcaNDeXajurGB7LChj8SgQYS2ptm' -H 'TE: Trailers' | jq -r '.results | (map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > ./dados/covid_saude_gov_temp.csv; tail -n +2 -q ./dados/covid_saude_gov_temp.csv >> ./dados/covid_saude_gov.csv; rm ./dados/covid_saude_gov_temp.csv")
+
+#####################################
 # Defining Variables and Objects
 
 #set.seed(2)
@@ -104,14 +109,14 @@ if(unid=="p")
         nome_titulos  <-  "Brasil"
     
 
-if(length(opt$args) == 0){
-    dados.full <- read.csv("./dados/states2.csv", as.is = TRUE)
+if(unid == "p"){
+    if(length(opt$args) == 0){
+        dados.full <- read.csv("./dados/brasil.csv", as.is = TRUE)
+        dados.full[,1] <- as.Date(dados.full[,1], format = "%d-%m-%y")
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
-    }
-
-if(unid == "p"){
-    dados.clean <- as.data.frame(aggregate(dados.full$confirmed.cases, by = list(dados.full$day), FUN = sum, na.rm = TRUE))
+}
+    dados.clean <- as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$dia), FUN = sum, na.rm = TRUE))
     names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]
@@ -123,8 +128,17 @@ if(unid == "p"){
                                    days.forecast = 5)
     data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
+    if(length(opt$args) == 0){
+    dados.full <- read.csv("./dados/states2.csv", as.is = TRUE)
+} else {
+    dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
+    }
     dados.filter <- dados.full[dados.full$state == nome_unid,]
     dados.clean <- as.data.frame(aggregate(dados.filter$confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
+    ## Removendo último dia caso esteja em branco
+    if(dados.clean[nrow(dados.clean),1] != Sys.Date()){
+        dados.clean <- dados.clean[-nrow(dados.clean),]
+    }
     names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]

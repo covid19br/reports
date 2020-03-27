@@ -18,3 +18,6 @@ d <- data.frame(day=as.Date(dados[,1]$day), state=unlist(dados[,2]),
 
 write.csv(d, file='dados/states2.csv', row.names=FALSE)
 
+dados_brasil <- read.csv(doc_brasil, as.is = TRUE)
+
+write.csv(dados_brasil, file = "./dados/brasil.csv", row.names = FALSE)
