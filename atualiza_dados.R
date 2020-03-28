@@ -31,7 +31,7 @@ dados_brasil <- read.csv("./dados/covid_estados_auto.csv", as.is = TRUE)
 dados_curr <- read.csv("./dados/covid_estados_auto_curr.csv", as.is = TRUE)
 dados_curr <- dados_curr[order(dados_curr$nome),]
 
-#dados_brasil$day <- max(as.Date(sapply(strsplit(dados_brasil$updatedAt, split = "T"), function(x){x[1]})))
+dados_brasil$day <- as.Date(dados_brasil$day)
 dados_curr$day <- max(as.Date(sapply(strsplit(dados_curr$updatedAt, split = "T"), function(x){x[1]})))
 
 curr_casos <- data.frame(nome = dados_curr$nome, qtd_confirmado = dados_curr$qtd_confirmado)

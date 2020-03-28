@@ -106,7 +106,7 @@ if(unid=="p")
 
 if(unid == "p"){
     if(length(opt$args) == 0){
-        dados.full <- read.csv("./dados/brasil_manual.csv", as.is = TRUE)
+        dados.full <- read.csv("./dados/covid_brasil_manual.csv", as.is = TRUE)
         dados.full[,1] <- as.Date(dados.full[,1], format = "%d-%m-%y")
         dados.full <- dados.full[dados.full[,2] != 0,]
 } else {
