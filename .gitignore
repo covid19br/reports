@@ -45,3 +45,6 @@ vignettes/*.pdf
 
 # vim tmp files
 .*swp
+
+# Pasta de relatórios
+/relatorios_gerados/

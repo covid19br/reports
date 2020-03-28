@@ -168,7 +168,7 @@
 2020-03-24,"Acre",3,21,224,0,"yes"
 2020-03-24,"Alagoas",175,10,104,NA,NA
 2020-03-24,"Amapá",122,1,70,0,"no"
-2020-03-24,"Amazonas",NA,NA,NA,NA,NA
+2020-03-24,"Amazonas",NA,NA,NA,1,NA
 2020-03-24,"Bahia",NA,79,725,0,"yes"
 2020-03-24,"Ceará",NA,185,NA,0,NA
 2020-03-24,"Distrito Federal",NA,NA,NA,NA,NA
@@ -195,7 +195,7 @@
 2020-03-25,"Acre",47,23,225,0,NA
 2020-03-25,"Alagoas",207,11,145,0,NA
 2020-03-25,"Amapá",183,1,70,0,NA
-2020-03-25,"Amazonas",21,54,NA,0,NA
+2020-03-25,"Amazonas",21,54,NA,1,NA
 2020-03-25,"Bahia",NA,91,981,0,"yes"
 2020-03-25,"Ceará",NA,211,NA,0,NA
 2020-03-25,"Distrito Federal",NA,NA,NA,NA,NA
@@ -220,56 +220,110 @@
 2020-03-25,"Sergipe",NA,16,NA,NA,"yes"
 2020-03-25,"Tocantins",NA,7,NA,0,NA
 2020-03-26,"Acre",76,23,235,0,NA
-2020-03-26,"Alagoas",NA,NA,NA,NA,NA
-2020-03-26,"Amapá",NA,NA,NA,NA,NA
-2020-03-26,"Amazonas",NA,NA,NA,NA,NA
+2020-03-26,"Alagoas",274,11,178,0,NA
+2020-03-26,"Amapá",205,2,98,0,NA
+2020-03-26,"Amazonas",NA,67,NA,0,NA
 2020-03-26,"Bahia",34,108,1082,0,NA
-2020-03-26,"Ceará",NA,NA,NA,NA,NA
+2020-03-26,"Ceará",4129,238,238,3,NA
 2020-03-26,"Distrito Federal",NA,NA,NA,NA,NA
-2020-03-26,"Espírito Santo",NA,NA,NA,NA,NA
+2020-03-26,"Espírito Santo",1039,NA,363,0,NA
 2020-03-26,"Goiás",NA,38,NA,1,NA
-2020-03-26,"Maranhão",NA,NA,NA,NA,NA
-2020-03-26,"Mato Grosso",NA,NA,NA,NA,NA
+2020-03-26,"Maranhão",728,10,297,0,NA
+2020-03-26,"Mato Grosso",385,11,NA,0,NA
 2020-03-26,"Mato Grosso do Sul",53,25,299,0,NA
 2020-03-26,"Minas Gerais",17409,153,NA,0,NA
 2020-03-26,"Pará",60,13,376,0,NA
 2020-03-26,"Paraíba",NA,6,227,0,NA
 2020-03-26,"Paraná",3487,106,613,0,NA
-2020-03-26,"Pernambuco",NA,46,NA,NA,NA
-2020-03-26,"Piauí",167,8,173,0,NA
+2020-03-26,"Pernambuco",NA,46,NA,3,NA
+2020-03-26,"Piauí",190,9,192,0,NA
 2020-03-26,"Rio de Janeiro",NA,421,NA,9,NA
-2020-03-26,"Rio Grande do Norte",NA,NA,NA,NA,NA
+2020-03-26,"Rio Grande do Norte",1125,19,153,0,NA
 2020-03-26,"Rio Grande do Sul",258,190,1015,1,NA
-2020-03-26,"Rondônia",NA,NA,NA,NA,NA
-2020-03-26,"Roraima",NA,NA,NA,NA,NA
+2020-03-26,"Rondônia",NA,6,219,0,NA
+2020-03-26,"Roraima",26,10,34,0,NA
 2020-03-26,"Santa Catarina",325,149,NA,1,NA
 2020-03-26,"São Paulo",NA,1052,NA,58,NA
 2020-03-26,"Sergipe",NA,NA,NA,NA,NA
 2020-03-26,"Tocantins",NA,8,NA,0,NA
-2020-03-27,"Acre",NA,NA,NA,NA,NA
-2020-03-27,"Alagoas",NA,NA,NA,NA,NA
-2020-03-27,"Amapá",NA,NA,NA,NA,NA
-2020-03-27,"Amazonas",NA,NA,NA,NA,NA
-2020-03-27,"Bahia",NA,NA,NA,NA,NA
-2020-03-27,"Ceará",NA,NA,NA,NA,NA
-2020-03-27,"Distrito Federal",NA,NA,NA,NA,NA
-2020-03-27,"Espírito Santo",NA,NA,NA,NA,NA
-2020-03-27,"Goiás",NA,NA,NA,NA,NA
+2020-03-27,"Acre",95,25,243,0,NA
+2020-03-27,"Alagoas",302,12,224,0,NA
+2020-03-27,"Amapá",313,2,98,0,NA
+2020-03-27,"Amazonas",NA,81,NA,1,NA
+2020-03-27,"Bahia",NA,123,1240,0,NA
+2020-03-27,"Ceará",NA,282,NA,3,NA
+2020-03-27,"Distrito Federal",NA,230,NA,NA,NA
+2020-03-27,"Espírito Santo",1105,NA,411,0,NA
+2020-03-27,"Goiás",2300,49,470,1,NA
 2020-03-27,"Maranhão",NA,NA,NA,NA,NA
-2020-03-27,"Mato Grosso",NA,NA,NA,NA,NA
-2020-03-27,"Mato Grosso do Sul",NA,NA,NA,NA,NA
-2020-03-27,"Minas Gerais",NA,NA,NA,NA,NA
-2020-03-27,"Pará",NA,NA,NA,NA,NA
-2020-03-27,"Paraíba",NA,NA,NA,NA,NA
-2020-03-27,"Paraná",NA,NA,NA,NA,NA
-2020-03-27,"Pernambuco",NA,NA,NA,NA,NA
-2020-03-27,"Piauí",NA,NA,NA,NA,NA
-2020-03-27,"Rio de Janeiro",NA,NA,NA,NA,NA
-2020-03-27,"Rio Grande do Norte",NA,NA,NA,NA,NA
-2020-03-27,"Rio Grande do Sul",NA,NA,NA,NA,NA
-2020-03-27,"Rondônia",NA,NA,NA,NA,NA
-2020-03-27,"Roraima",NA,NA,NA,NA,NA
-2020-03-27,"Santa Catarina",NA,NA,NA,NA,NA
-2020-03-27,"São Paulo",NA,NA,NA,NA,NA
-2020-03-27,"Sergipe",NA,NA,NA,NA,NA
-2020-03-27,"Tocantins",NA,NA,NA,NA,NA
+2020-03-27,"Mato Grosso",556,11,NA,0,NA
+2020-03-27,"Mato Grosso do Sul",51,28,337,0,NA
+2020-03-27,"Minas Gerais",21691,189,NA,0,NA
+2020-03-27,"Pará",122,16,451,0,NA
+2020-03-27,"Paraíba",NA,10,303,0,NA
+2020-03-27,"Paraná",1078,NA,2004,2,NA
+2020-03-27,"Pernambuco",NA,57,NA,4,NA
+2020-03-27,"Piauí",203,9,212,0,NA
+2020-03-27,"Rio de Janeiro",NA,493,NA,10,NA
+2020-03-27,"Rio Grande do Norte",1176,28,282,0,NA
+2020-03-27,"Rio Grande do Sul",NA,197,NA,2,NA
+2020-03-27,"Rondônia",155,6,228,0,NA
+2020-03-27,"Roraima",5,12,55,0,NA
+2020-03-27,"Santa Catarina",NA,163,NA,1,NA
+2020-03-27,"São Paulo",NA,1223,NA,68,NA
+2020-03-27,"Sergipe",22,16,142,0,NA
+2020-03-27,"Tocantins",NA,9,NA,0,NA
+2020-03-28,"Acre",NA,NA,NA,NA,NA
+2020-03-28,"Alagoas",NA,NA,NA,NA,NA
+2020-03-28,"Amapá",NA,NA,NA,NA,NA
+2020-03-28,"Amazonas",NA,NA,NA,NA,NA
+2020-03-28,"Bahia",NA,NA,NA,NA,NA
+2020-03-28,"Ceará",NA,NA,NA,NA,NA
+2020-03-28,"Distrito Federal",NA,NA,NA,NA,NA
+2020-03-28,"Espírito Santo",NA,NA,NA,NA,NA
+2020-03-28,"Goiás",NA,NA,NA,NA,NA
+2020-03-28,"Maranhão",NA,NA,NA,NA,NA
+2020-03-28,"Mato Grosso",NA,NA,NA,NA,NA
+2020-03-28,"Mato Grosso do Sul",NA,NA,NA,NA,NA
+2020-03-28,"Minas Gerais",NA,NA,NA,NA,NA
+2020-03-28,"Pará",NA,NA,NA,NA,NA
+2020-03-28,"Paraíba",NA,NA,NA,NA,NA
+2020-03-28,"Paraná",NA,NA,NA,NA,NA
+2020-03-28,"Pernambuco",NA,NA,NA,NA,NA
+2020-03-28,"Piauí",NA,NA,NA,NA,NA
+2020-03-28,"Rio de Janeiro",NA,NA,NA,NA,NA
+2020-03-28,"Rio Grande do Norte",NA,NA,NA,NA,NA
+2020-03-28,"Rio Grande do Sul",NA,NA,NA,NA,NA
+2020-03-28,"Rondônia",NA,NA,NA,NA,NA
+2020-03-28,"Roraima",NA,NA,NA,NA,NA
+2020-03-28,"Santa Catarina",NA,NA,NA,NA,NA
+2020-03-28,"São Paulo",NA,NA,NA,NA,NA
+2020-03-28,"Sergipe",NA,NA,NA,NA,NA
+2020-03-28,"Tocantins",NA,NA,NA,NA,NA
+2020-03-29,"Acre",NA,NA,NA,NA,NA
+2020-03-29,"Alagoas",NA,NA,NA,NA,NA
+2020-03-29,"Amapá",NA,NA,NA,NA,NA
+2020-03-29,"Amazonas",NA,NA,NA,NA,NA
+2020-03-29,"Bahia",NA,NA,NA,NA,NA
+2020-03-29,"Ceará",NA,NA,NA,NA,NA
+2020-03-29,"Distrito Federal",NA,NA,NA,NA,NA
+2020-03-29,"Espírito Santo",NA,NA,NA,NA,NA
+2020-03-29,"Goiás",NA,NA,NA,NA,NA
+2020-03-29,"Maranhão",NA,NA,NA,NA,NA
+2020-03-29,"Mato Grosso",NA,NA,NA,NA,NA
+2020-03-29,"Mato Grosso do Sul",NA,NA,NA,NA,NA
+2020-03-29,"Minas Gerais",NA,NA,NA,NA,NA
+2020-03-29,"Pará",NA,NA,NA,NA,NA
+2020-03-29,"Paraíba",NA,NA,NA,NA,NA
+2020-03-29,"Paraná",NA,NA,NA,NA,NA
+2020-03-29,"Pernambuco",NA,NA,NA,NA,NA
+2020-03-29,"Piauí",NA,NA,NA,NA,NA
+2020-03-29,"Rio de Janeiro",NA,NA,NA,NA,NA
+2020-03-29,"Rio Grande do Norte",NA,NA,NA,NA,NA
+2020-03-29,"Rio Grande do Sul",NA,NA,NA,NA,NA
+2020-03-29,"Rondônia",NA,NA,NA,NA,NA
+2020-03-29,"Roraima",NA,NA,NA,NA,NA
+2020-03-29,"Santa Catarina",NA,NA,NA,NA,NA
+2020-03-29,"São Paulo",NA,NA,NA,NA,NA
+2020-03-29,"Sergipe",NA,NA,NA,NA,NA
+2020-03-29,"Tocantins",NA,NA,NA,NA,NA
