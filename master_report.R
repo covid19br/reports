@@ -37,16 +37,16 @@ source("https://raw.githubusercontent.com/covid19br/covid19br.github.io/master/_
 
 option_list <- list(
     make_option("--u", default = "p",
-        help=("Unidade (país/estado/cidade) de interesse para gerar relatório. p para Brasil, e para Estado, c para cidades."),
-        metavar="Unidade"),
+        help = ("Unidade (país/estado/cidade) de interesse para gerar relatório. p para Brasil, e para Estado, c para cidades."),
+        metavar = "Unidade"),
 
     make_option("--n", default = "Brasil",
-        help="Nome da unidade de interesse.",
-        metavar="Nome_Unidade")## ,
+        help = ("Sigla da unidade de interesse."),
+        metavar = "Nome_Unidade"),
 
-    ## make_option("--b", type="integer", default=1000,
-    ##     help=("Skip results of the first # of iterations [default %default]."),
-    ##     metavar="Burnin"),
+    make_option("--d", default = "t",
+       help = ("Data para confecção do relatório. O padrão é t para hoje (today), com formato AAAA-MM-DD"),
+       metavar = "Data")##,
 
     ## make_option("--p", type="integer", default=100,
     ##     help=("Print frequency [default %default]."),
@@ -86,7 +86,7 @@ opt <- parse_args(parser_object, args = commandArgs(trailingOnly = TRUE), positi
 # Handling User Input and/or Option Errors
 
 if(opt$options$u != "p" & opt$options$n == "Brasil"){
-   cat("Erro: informar nome do Estado desejado.\n\n"); print_help(parser_object); quit(status=1)
+   cat("Erro: informar sigla do Estado desejado.\n\n"); print_help(parser_object); quit(status=1)
 }
 
 
@@ -96,25 +96,27 @@ if(opt$options$u != "p" & opt$options$n == "Brasil"){
 #set.seed(2)
 unid <- opt$options$u
 nome_unid <- opt$options$n
+tempo <- opt$options$d
+
 if(unid=="e")
-    nome_titulos  <-  paste("Estado de/da",nome_unid)
+    nome_titulos  <-  paste("Estado de/da", nome_unid)
 if(unid=="m")
-    nome_titulos  <-  paste("Município de",nome_unid)
+    nome_titulos  <-  paste("Município de", nome_unid)
 if(unid=="p")
         nome_titulos  <-  "Brasil"
-    
 
-if(unid == "p"){
-    if(length(opt$args) == 0){
-        dados.full <- read.csv("./dados/covid_brasil_manual.csv", as.is = TRUE)
-        dados.full[,1] <- as.Date(dados.full[,1], format = "%d-%m-%y")
-        dados.full <- dados.full[dados.full[,2] != 0,]
+if(length(opt$args) == 0){
+        dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE)
+        dados.full$data <- as.Date(dados.full$data, format = "%Y-%m-%d")
+        #dados.full <- dados.full[dados.full[,2] != 0,]
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
-    dados.full[rowSums(is.na(dados.full)) != 5,]
+    #dados.full[rowSums(is.na(dados.full)) != 5,]
 }
-    dados.clean <- as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$dia), FUN = sum, na.rm = TRUE))
-    dados.full[rowSums(is.na(dados.full)) != 5,]
+
+if(unid == "p"){
+    dados.clean <- as.data.frame(aggregate(dados.full$casosAcumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
+    #dados.full[rowSums(is.na(dados.full)) != 5,]
     names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]
@@ -126,17 +128,12 @@ if(unid == "p"){
                                    days.forecast = 5)
     data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
-    if(length(opt$args) == 0){
-    dados.full <- read.csv("./dados/covid_estados_manual.csv", as.is = TRUE)
-} else {
-    dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
-    }
-    dados.filter <- dados.full[dados.full$state == nome_unid,]
-    dados.clean <- as.data.frame(aggregate(dados.filter$confirmed.cases, by = list(dados.filter$day), FUN = sum, na.rm = TRUE))
+    dados.filter <- dados.full[dados.full$estado == nome_unid,]
+    dados.clean <- as.data.frame(aggregate(dados.filter$casosAcumulados, by = list(dados.filter$data), FUN = sum, na.rm = TRUE))
     ## Removendo os últimos dias caso estejam em branco
-    if(sum(dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0){
-        dados.clean <- dados.clean[-which((dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0),]
-    }
+    ## if(sum(dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0){
+    ##     dados.clean <- dados.clean[-which((dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0),]
+    ## }
     names(dados.clean) <- c("day", "confirmed.cases")
 
     nconf <- dados.clean[!duplicated(dados.clean),]
@@ -146,9 +143,9 @@ if(unid == "p"){
     exp.5d <- forecast.exponential(nconf.zoo,
                                    start = length(time(nconf.zoo))-4,
                                    days.forecast = 5)
-    data.final <- format(time(exp.5d)[5], format="%d de %B")
+    data.final <- format(time(exp.5d)[5], format = "%d de %B")
 }
 
 render(input = "./projecoes_observatorio_modelo.Rmd",
-       output_file = paste0("./relatorios_gerados/relatorio_", gsub(" ", "_", nome_unid), "_", format(Sys.time(), '%d-%m-%Y_%Hh%Mmin%Ss'), ".pdf"),
+       output_file = paste0("./relatorios_gerados/relatorio_", gsub(" ", "_", nome_unid), "_", ifelse(tempo == "t", format(Sys.time(), '%d-%m-%Y_%Hh%Mmin%Ss'), format(as.Date(tempo), "%d-%m-%Y")), ".pdf"),
        encoding = "utf8")
