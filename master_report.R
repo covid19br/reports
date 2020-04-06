@@ -25,6 +25,7 @@ suppressPackageStartupMessages(library("rmarkdown"))
 suppressPackageStartupMessages(library("knitr"))
 suppressPackageStartupMessages(library("dplyr"))
 suppressPackageStartupMessages(library("ggplot2"))
+suppressPackageStartupMessages(library("patchwork"))
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
 source("https://raw.githubusercontent.com/covid19br/covid19br.github.io/master/_src/funcoes.R")
 
@@ -106,9 +107,12 @@ if(unid=="p")
         nome_titulos  <-  "Brasil"
 
 if(length(opt$args) == 0){
-        dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE)
-        dados.full$data <- as.Date(dados.full$data, format = "%Y-%m-%d")
-        #dados.full <- dados.full[dados.full[,2] != 0,]
+    dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE, sep = ";")
+    names(dados.full)[grep("dat", names(dados.full))] <- "data"
+    names(dados.full)[grep("estad", names(dados.full))] <- "estado"
+    dados.full$data <- rep(seq.Date(from = as.Date("2020/01/30", format = "%Y/%m/%d"), to = as.Date("2020/04/06", format = "%Y/%m/%d"), by = 1), times = length(unique(dados.full$estado)))
+    dados.full$data <- as.Date(dados.full$data, format = "%Y/%m/%d")
+    
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
     #dados.full[rowSums(is.na(dados.full)) != 5,]
