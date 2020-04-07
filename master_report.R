@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 # Written by:
 # Gustavo Burin <gustavoburin@usp.br>
-# In colaboration with:
+# In collaboration with:
 # Equipe Observatório COVID-19 BR
 
 
@@ -107,11 +107,12 @@ if(unid=="p")
         nome_titulos  <-  "Brasil"
 
 if(length(opt$args) == 0){
-    dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE, sep = ";")
+    dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE, sep = ",")
     names(dados.full)[grep("dat", names(dados.full))] <- "data"
-    names(dados.full)[grep("estad", names(dados.full))] <- "estado"
-    dados.full$data <- rep(seq.Date(from = as.Date("2020/01/30", format = "%Y/%m/%d"), to = as.Date("2020/04/06", format = "%Y/%m/%d"), by = 1), times = length(unique(dados.full$estado)))
-    dados.full$data <- as.Date(dados.full$data, format = "%Y/%m/%d")
+    names(dados.full)[2] <- "estado"
+    #names(dados.full)[grep("estad", names(dados.full))] <- "estado"
+    #dados.full$data <- rep(seq.Date(from = as.Date("2020/01/30", format = "%Y/%m/%d"), to = as.Date("2020/04/06", format = "%Y/%m/%d"), by = 1), times = length(unique(dados.full$estado)))
+    dados.full$data <- as.Date(dados.full$data, format = "%Y-%m-%d")
     
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
