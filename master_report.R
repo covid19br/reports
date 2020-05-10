@@ -108,19 +108,24 @@ if(unid=="p")
 
 if(length(opt$args) == 0){
     dados.full <- read.csv(paste0("./dados/BRnCov19_", ifelse(tempo == "t", format(Sys.Date(), "%Y%m%d"), format(as.Date(tempo), "%Y%m%d")), ".csv"), as.is = TRUE, sep = ",")
-    names(dados.full)[grep("dat", names(dados.full))] <- "data"
-    names(dados.full)[2] <- "estado"
+    #names(dados.full)[grep("dat", names(dados.full))] <- "data"
+    #names(dados.full)[2] <- "estado"
     #names(dados.full)[grep("estad", names(dados.full))] <- "estado"
     #dados.full$data <- rep(seq.Date(from = as.Date("2020/01/30", format = "%Y/%m/%d"), to = as.Date("2020/04/06", format = "%Y/%m/%d"), by = 1), times = length(unique(dados.full$estado)))
-    dados.full$data <- as.Date(dados.full$data, format = "%Y-%m-%d")
-    
+    #dados.full$data <- as.Date(dados.full$data, format = "%d/%m/%Y")
+    #names(dados.full) <- c("regiao", "estado", "data", "novos.casos", "casos.acumulados", "obitos.novos", "obitos.acumulados")
+    #write.table(dados.full, file = paste0("./dados/BRnCov19_", format(Sys.Date(), "%Y%m%d"), ".csv"), row.names = FALSE, sep = ",")
+    #write.table(dados.full, file = "./dados/EstadosCov19.csv", row.names = FALSE, sep = ",")
 } else {
     dados.full <- read.csv(paste0(opt$args[1]), as.is = TRUE)
     #dados.full[rowSums(is.na(dados.full)) != 5,]
 }
 
 if(unid == "p"){
-    dados.clean <- as.data.frame(aggregate(dados.full$casosAcumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
+    dados.br <- as.data.frame(aggregate(dados.full[, -c(1:3)], by = list(dados.full$data), FUN = sum, na.rm = TRUE))
+    names(dados.br)[1] <- "data"
+    #write.table(dados.br, file = "./dados/BrasilCov19.csv", row.names = FALSE, sep = ",")
+    dados.clean <- as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
     #dados.full[rowSums(is.na(dados.full)) != 5,]
     names(dados.clean) <- c("day", "confirmed.cases")
 
@@ -134,7 +139,7 @@ if(unid == "p"){
     data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
     dados.filter <- dados.full[dados.full$estado == nome_unid,]
-    dados.clean <- as.data.frame(aggregate(dados.filter$casosAcumulados, by = list(dados.filter$data), FUN = sum, na.rm = TRUE))
+    dados.clean <- as.data.frame(aggregate(dados.filter$casos.acumulados, by = list(dados.filter$data), FUN = sum, na.rm = TRUE))
     ## Removendo os últimos dias caso estejam em branco
     ## if(sum(dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0){
     ##     dados.clean <- dados.clean[-which((dados.clean[, 1] >= Sys.Date()) != 0 & sum(dados.clean[, 2] == 0) != 0),]
