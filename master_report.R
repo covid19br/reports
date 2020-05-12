@@ -122,8 +122,8 @@ if(length(opt$args) == 0){
 }
 
 if(unid == "p"){
-    dados.br <- as.data.frame(aggregate(dados.full[, -c(1:3)], by = list(dados.full$data), FUN = sum, na.rm = TRUE))
-    names(dados.br)[1] <- "data"
+    dados.br <- read.csv("./dados/BrasilCov19.csv", as.is = TRUE)
+    #names(dados.br)[1] <- "data"
     #write.table(dados.br, file = "./dados/BrasilCov19.csv", row.names = FALSE, sep = ",")
     dados.clean <- as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
     #dados.full[rowSums(is.na(dados.full)) != 5,]
@@ -138,6 +138,7 @@ if(unid == "p"){
                                    days.forecast = 5)
     data.final <- format(time(exp.5d)[5], format="%d de %B")
 } else if(unid == "e"){
+    dados.full <- read.csv("./dados/EstadosCov19.csv", as.is = TRUE)
     dados.filter <- dados.full[dados.full$estado == nome_unid,]
     dados.clean <- as.data.frame(aggregate(dados.filter$casos.acumulados, by = list(dados.filter$data), FUN = sum, na.rm = TRUE))
     ## Removendo os últimos dias caso estejam em branco
