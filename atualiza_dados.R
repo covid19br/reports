@@ -75,7 +75,7 @@ dados.full <- dados.full[order(dados.full$codmun, dados.full$data),]
 dados.full$novos.casos <- c(1, diff(dados.full$casosAcumulado))
 dados.full$obitos.novos <- c(0, diff(dados.full$obitosAcumulado))
 dados.full$novos.casos[dados.full$novos.casos < 0] <- 1
-dados.full$obitos.novos[dados.full$obitos.novos < 0] <- 1
+dados.full$obitos.novos[dados.full$obitos.novos < 0] <- 0
 
 names(dados.full) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "obitos.acumulados", "recuperados.novos", "acompanhamento.novos", "novos.casos", "obitos.novos")
 
@@ -92,6 +92,8 @@ dados.estados <- dados.estados[is.na(dados.estados$codmun),]
 dados.estados <- dados.estados[order(dados.estados$coduf, dados.estados$data),]
 dados.estados$novos.casos <- c(1, diff(dados.estados$casosAcumulado))
 dados.estados$obitos.novos <- c(0, diff(dados.estados$obitosAcumulado))
+dados.estados$novos.casos[dados.estados$novos.casos < 0] <- 1
+dados.estados$obitos.novos[dados.estados$obitos.novos < 0] <- 0
 
 names(dados.estados) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "obitos.acumulados", "recuperados.novos", "acompanhamento.novos", "novos.casos", "obitos.novos")
 
