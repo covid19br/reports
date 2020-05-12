@@ -85,10 +85,15 @@ names(dados.full) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codR
 ##     dados.full$data <- as.Date(dados.full$data, format = "%Y-%m-%d")
 ## }
 
-write.table(dados.full, file = paste0("./dados/BRnCov19_", format(Sys.Date()-1, format = "%Y%m%d"), ".csv"), sep = ",", row.names = FALSE)
+write.table(dados.full, file = paste0("./dados/BRnCov19_", format(Sys.Date(), format = "%Y%m%d"), ".csv"), sep = ",", row.names = FALSE)
 
 dados.estados <- dados.raw[dados.raw$regiao != "Brasil",]
 dados.estados <- dados.estados[is.na(dados.estados$codmun),]
+dados.estados <- dados.estados[order(dados.estados$coduf, dados.estados$data),]
+dados.estados$novos.casos <- c(1, diff(dados.estados$casosAcumulado))
+dados.estados$obitos.novos <- c(0, diff(dados.estados$obitosAcumulado))
+
+names(dados.estados) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "obitos.acumulados", "recuperados.novos", "acompanhamento.novos", "novos.casos", "obitos.novos")
 
 write.table(dados.estados[, c("regiao", "estado", "data", "novos.casos", "casos.acumulados", "obitos.novos", "obitos.acumulados")], file = "./dados/EstadosCov19.csv", sep = ",", row.names = FALSE)
 
