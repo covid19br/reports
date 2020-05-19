@@ -65,7 +65,11 @@ library("readxl")
 file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
 
 dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric"))
-dados.raw$data <- as.Date(dados.raw$data)
+if(is.na(as.integer(dados.raw$data[1]))){
+    dados.raw$data <- as.Date(dados.raw$data)
+} else {
+    dados.raw$data <- as.Date(as.integer(dados.raw$data), origin = "1900-01-01") - 2
+}
 
 dados.full <- dados.raw[dados.raw$regiao != "Brasil", ]
 dados.full <- dados.full[!is.na(dados.full$codmun), ]
