@@ -125,7 +125,9 @@ if(unid == "p"){
     dados.br <- read.csv("./dados/BrasilCov19.csv", as.is = TRUE)
     #names(dados.br)[1] <- "data"
     #write.table(dados.br, file = "./dados/BrasilCov19.csv", row.names = FALSE, sep = ",")
-    dados.clean <- as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
+    dados.clean <- dados.br[, c("data", "casos.acumulados")]
+    dados.clean$data <- as.Date(dados.clean$data)
+        #as.data.frame(aggregate(dados.full$casos.acumulados, by = list(dados.full$data), FUN = sum, na.rm = TRUE))
     #dados.full[rowSums(is.na(dados.full)) != 5,]
     names(dados.clean) <- c("day", "confirmed.cases")
 
