@@ -27,7 +27,7 @@ suppressPackageStartupMessages(library("dplyr"))
 suppressPackageStartupMessages(library("ggplot2"))
 suppressPackageStartupMessages(library("patchwork"))
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
-source("https://raw.githubusercontent.com/covid19br/covid19br.github.io/master/_src/funcoes.R")
+source("https://raw.githubusercontent.com/covid19br/covid19br.github.io/master/_src/fct/funcoes.R")
 
 
 #####################################
