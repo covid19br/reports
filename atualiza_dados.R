@@ -65,6 +65,7 @@ library("readxl")
 file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
 
 dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+dados.raw <- dados.raw[!is.na(dados.raw$data),]
 if(is.na(as.integer(dados.raw$data[1]))){
     dados.raw$data <- as.Date(dados.raw$data)
 } else {
