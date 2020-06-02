@@ -64,8 +64,10 @@ library("readxl")
 
 file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
 
-dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+
 dados.raw <- dados.raw[!is.na(dados.raw$data),]
+
 if(is.na(as.integer(dados.raw$data[1]))){
     dados.raw$data <- as.Date(dados.raw$data)
 } else {
@@ -77,12 +79,14 @@ dados.full <- dados.full[!is.na(dados.full$codmun), ]
 dados.full <- dados.full[!is.na(dados.full$municipio), ]
 
 dados.full <- dados.full[order(dados.full$codmun, dados.full$data),]
-dados.full$novos.casos <- c(1, diff(dados.full$casosAcumulado))
-dados.full$obitos.novos <- c(0, diff(dados.full$obitosAcumulado))
-dados.full$novos.casos[dados.full$novos.casos < 0] <- 1
-dados.full$obitos.novos[dados.full$obitos.novos < 0] <- 0
+#dados.full$novos.casos <- c(1, diff(dados.full$casosAcumulado))
+#dados.full$obitos.novos <- c(0, diff(dados.full$obitosAcumulado))
+#dados.full$novos.casos[dados.full$novos.casos < 0] <- 1
+#dados.full$obitos.novos[dados.full$obitos.novos < 0] <- 0
 
 names(dados.full) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
+
+dados.full <- dados.full[!duplicated(dados.full),]
 
 ## if(sum(is.na(as.Date(dados.full$data, format = "%d/%m/%Y"))) == 0){
 ##     dados.full$data <- as.Date(dados.full$data, format = "%d/%m/%Y")
