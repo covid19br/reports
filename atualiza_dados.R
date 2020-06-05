@@ -99,10 +99,10 @@ write.table(dados.full, file = paste0("./dados/BRnCov19_", format(Sys.Date(), fo
 dados.estados <- dados.raw[dados.raw$regiao != "Brasil",]
 dados.estados <- dados.estados[is.na(dados.estados$codmun),]
 dados.estados <- dados.estados[order(dados.estados$coduf, dados.estados$data),]
-dados.estados$novos.casos <- c(1, diff(dados.estados$casosAcumulado))
-dados.estados$obitos.novos <- c(0, diff(dados.estados$obitosAcumulado))
-dados.estados$novos.casos[dados.estados$novos.casos < 0] <- 1
-dados.estados$obitos.novos[dados.estados$obitos.novos < 0] <- 0
+#dados.estados$novos.casos <- c(1, diff(dados.estados$casosAcumulado))
+#dados.estados$obitos.novos <- c(0, diff(dados.estados$obitosAcumulado))
+#dados.estados$novos.casos[dados.estados$novos.casos < 0] <- 1
+#dados.estados$obitos.novos[dados.estados$obitos.novos < 0] <- 0
 
 names(dados.estados) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
 
