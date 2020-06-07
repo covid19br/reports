@@ -110,8 +110,8 @@ write.table(dados.estados[, c("regiao", "estado", "data", "novos.casos", "casos.
 
 dados.br <- dados.raw[dados.raw$regiao == "Brasil",]
 
-dados.br$novos.casos <- c(1, diff(dados.br$casosAcumulado))
-dados.br$obitos.novos <- c(0, diff(dados.br$obitosAcumulado))
+#dados.br$novos.casos <- c(1, diff(dados.br$casosAcumulado))
+#dados.br$obitos.novos <- c(0, diff(dados.br$obitosAcumulado))
 
 names(dados.br) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
 
