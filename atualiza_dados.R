@@ -64,9 +64,11 @@ library("readxl")
 
 file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
 
-dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
+dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "logical"))
 
 dados.raw <- dados.raw[!is.na(dados.raw$data),]
+
+dados.raw$data <- gsub(" UTC", "", dados.raw$data)
 
 if(is.na(as.integer(dados.raw$data[1]))){
     dados.raw$data <- as.Date(dados.raw$data)
@@ -84,7 +86,7 @@ dados.full <- dados.full[order(dados.full$codmun, dados.full$data),]
 #dados.full$novos.casos[dados.full$novos.casos < 0] <- 1
 #dados.full$obitos.novos[dados.full$obitos.novos < 0] <- 0
 
-names(dados.full) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
+names(dados.full) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos", "FgMetro")
 
 dados.full <- dados.full[!duplicated(dados.full),]
 
@@ -104,7 +106,7 @@ dados.estados <- dados.estados[order(dados.estados$coduf, dados.estados$data),]
 #dados.estados$novos.casos[dados.estados$novos.casos < 0] <- 1
 #dados.estados$obitos.novos[dados.estados$obitos.novos < 0] <- 0
 
-names(dados.estados) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
+names(dados.estados) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos", "FgMetro")
 
 write.table(dados.estados[, c("regiao", "estado", "data", "novos.casos", "casos.acumulados", "obitos.novos", "obitos.acumulados")], file = "./dados/EstadosCov19.csv", sep = ",", row.names = FALSE)
 
@@ -113,7 +115,7 @@ dados.br <- dados.raw[dados.raw$regiao == "Brasil",]
 #dados.br$novos.casos <- c(1, diff(dados.br$casosAcumulado))
 #dados.br$obitos.novos <- c(0, diff(dados.br$obitosAcumulado))
 
-names(dados.br) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos")
+names(dados.br) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos", "FgMetro")
 
 write.table(dados.br[, c("data", "novos.casos", "casos.acumulados", "obitos.novos", "obitos.acumulados")], file = "./dados/BrasilCov19.csv", sep = ",", row.names = FALSE)
 
