@@ -1,24 +1,3 @@
-﻿Unidade da Federação;Suspeitos;Confirmados;Descartados;Óbitos;Transmissão local
-Rondônia;1;0;0;0;Não
-Amazonas;2;0;4;0;Não
-Pará;4;0;5;0;Não
-Maranhão;0;0;2;0;Não
-Piauí;1;0;2;0;Não
-Ceará;12;0;24;0;Não
-Rio Grande do Norte;7;0;8;0;Não
-Paraíba;3;0;3;0;Não
-Pernambuco;6;0;14;0;Não
-Alagoas;7;0;1;0;Não
-Sergipe;3;0;1;0;Não
-Bahia;15;1;32;0;Não
-Minas Gerais;123;0;17;0;Não
-Espírito Santo;1;1;12;0;Não
-Rio de Janeiro;111;1;67;0;Não
-São Paulo;222;10;189;0;Não
-Paraná;25;0;13;0;Não
-Santa Catarina;59;0;10;0;Não
-Rio Grande do Sul;112;0;41;0;Não
-Mato Grosso do Sul;8;0;9;0;Não
-Mato Grosso do Sul;6;0;1;0;Não
-Goiás;4;0;12;0;Não
-Distrito Federal;36;0;13;0;Não
+version https://git-lfs.github.com/spec/v1
+oid sha256:a9436503f47b066b2fdd087a2a96f66318bf89477a7d09c88e3d3c488f558b5a
+size 706
