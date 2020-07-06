@@ -61,6 +61,7 @@
 #dados.full <- cbind(dados.raw[, 1:3], dados.raw[, c(names(sort(ordem))[c(4, 2, 3, 1)])])
 
 library("readxl")
+library("zip")
 
 file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
 
@@ -97,6 +98,8 @@ dados.full <- dados.full[!duplicated(dados.full),]
 ## }
 
 write.table(dados.full, file = paste0("./dados/BRnCov19_", format(Sys.Date(), format = "%Y%m%d"), ".csv"), sep = ",", row.names = FALSE)
+zipr(paste0("./dados/BRnCov19_", format(Sys.Date(), format = "%Y%m%d"), ".zip"), files = paste0("./dados/BRnCov19_", format(Sys.Date(), format = "%Y%m%d"), ".csv"))
+file.remove(paste0("./dados/BRnCov19_", format(Sys.Date(), format = "%Y%m%d"), ".csv"))
 
 dados.estados <- dados.raw[dados.raw$regiao != "Brasil",]
 dados.estados <- dados.estados[is.na(dados.estados$codmun),]
