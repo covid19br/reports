@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:65e377c6f9d176a11e7415fc2358cc4b3d7989cbc0a5a47124cc45cd41e69374
-size 228
+﻿UF;Suspeito;Confirmado;Descartado;Transmissão local
+Ceará;0;0;1;Não
+Minas Gerais;0;0;1;Não
+Paraná;0;0;2;Não
+Rio de Janeiro;1;0;2;Não
+Rio Grande do Sul;4;0;3;Não
+Santa Catarina;2;0;2;Não
+São Paulo;6;0;5;Não

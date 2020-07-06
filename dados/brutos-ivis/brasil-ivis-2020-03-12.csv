@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bacf4bb565604851543989f17201e19d6d40ee6816541a7a9831a22b8b68b4eb
-size 824
+﻿Unidade da Federação;Casos suspeitos;Casos confirmados;Casos descartados;Óbitos;Total;Transmissão local
+Rondônia;2;0;1;0;3;Não
+Acre;3;0;0;0;3;Não
+Amazonas;1;0;7;0;8;Não
+Pará;5;0;13;0;18;Não
+Maranhão;6;0;2;0;8;Não
+Piauí;1;0;2;0;3;Não
+Ceará;22;0;42;0;64;Não
+Rio Grande do Norte;13;0;15;0;28;Não
+Paraíba;10;0;6;0;16;Não
+Pernambuco;18;2;23;0;43;Não
+Alagoas;6;1;7;0;14;Não
+Sergipe;2;0;3;0;5;Não
+Bahia;65;2;36;0;103;Sim
+Minas Gerais;117;1;22;0;140;Não
+Espírito Santo;51;1;21;0;73;Não
+Rio de Janeiro;76;16;146;0;238;Não
+São Paulo;704;42;471;0;1.217;Sim
+Paraná;54;6;29;0;89;Não
+Santa Catarina;73;0;34;0;107;Não
+Rio Grande do Sul;81;4;183;0;268;Não
+Mato Grosso do Sul;9;0;15;0;24;Não
+Mato Grosso;6;0;7;0;13;Não
+Goiás;15;0;34;0;49;Não
+Distrito Federal;82;2;44;0;128;Não
