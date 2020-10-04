@@ -42,7 +42,7 @@
 
 ## dados_brasil <- dados_brasil[!duplicated(dados_brasil),]
 
-## Sys.setlocale(locale = "pt_BR.UTF-8")
+## 
 ## dados_curr <- read.csv(paste0("https://covid.saude.gov.br/assets/files/COVID19_", format(Sys.Date(), "%Y%m%d"), ".csv"), as.is = TRUE, sep = ";")
 ## dados_curr$data <- as.Date(dados_curr$data, format = "%d/%m/%y")
 
@@ -63,9 +63,15 @@
 library("readxl")
 library("zip")
 
-file <- paste0("~/Downloads/DT_PAINEL_COVIDBR_", format(Sys.Date(), format = "%Y%m%d"), ".xlsx")
+Sys.setlocale(locale = "pt_BR.UTF-8")
 
-dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "logical"))
+file <- paste0("~/Downloads/HIST_PAINEL_COVIDBR_", format(Sys.Date(), format = "%d%b%Y"), ".zip")
+
+unzip(file, exdir = "~/Downloads")
+
+#dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "logical"))
+
+dados.raw <- read.csv(gsub(".zip", ".csv", file), sep = ";")
 
 dados.raw <- dados.raw[!is.na(dados.raw$data),]
 
