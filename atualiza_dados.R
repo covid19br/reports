@@ -67,7 +67,7 @@ Sys.setlocale(locale = "pt_BR.UTF-8")
 
 file <- paste0("~/Downloads/HIST_PAINEL_COVIDBR_", format(Sys.Date(), format = "%d%b%Y"), ".zip")
 
-if(exists(file)){unzip(file, exdir = "~/Downloads")}
+tryCatch(unzip(file, exdir = "~/Downloads"))
 
 #dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "logical"))
 
@@ -127,9 +127,3 @@ dados.br <- dados.raw[dados.raw$regiao == "Brasil",]
 names(dados.br) <- c("regiao", "estado", "municipio", "coduf", "codmun", "codRegiaoSaude", "nomeRegiaoSaude", "data", "semanaEpi", "populacaoTCU2019", "casos.acumulados", "novos.casos", "obitos.acumulados", "obitos.novos", "recuperados.novos", "acompanhamento.novos", "FgMetro")
 
 write.table(dados.br[, c("data", "novos.casos", "casos.acumulados", "obitos.novos", "obitos.acumulados")], file = "./dados/BrasilCov19.csv", sep = ",", row.names = FALSE)
-
-
-
-
-
-
