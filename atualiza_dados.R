@@ -67,7 +67,7 @@ Sys.setlocale(locale = "pt_BR.UTF-8")
 
 file <- paste0("~/Downloads/HIST_PAINEL_COVIDBR_", format(Sys.Date(), format = "%d%b%Y"), ".zip")
 
-tryCatch(unzip(file, exdir = "~/Downloads"))
+tryCatch(unzip(file, exdir = "~/Downloads"), error = function(x){print("bleh")})
 
 #dados.raw <- read_excel(file, sheet = "Sheet 1", col_types = c("text", "text", "text", "numeric", "numeric", "numeric", "text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "logical"))
 
